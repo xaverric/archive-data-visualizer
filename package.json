@@ -1,9 +1,13 @@
 {
   "name": "archive-data-visualizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vizualize your archive world!",
   "main": "cli.js",
   "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xaverric/archive-data-visualizer.git"
+  },
   "author": "Daniel Jílek",
   "license": "MIT",
   "dependencies": {
@@ -11,5 +15,8 @@
     "csvtojson": "^2.0.10",
     "fs-extra": "^10.1.0",
     "winston": "^3.8.2"
+  },
+  "bin": {
+    "archive-data-visualizer": "cli.js"
   }
 }
