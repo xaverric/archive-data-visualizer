@@ -1,6 +1,6 @@
 const { escapeUu5StringArray } = require("../../../helper/uu5string-escape-helper");
 
-const template = (range, chartSeries, chartData, tableColumns, tableData) => `<uu5string/>
+const template = (visualization, range, chartSeries, chartData, tableColumns, tableData, command) => `<uu5string/>
     <UU5.Bricks.Lsi>
         <UU5.Bricks.Lsi.Item language="en">
             <UU5.Bricks.Section contentEditable colorSchema=null level="3" header="${range.header}">
@@ -41,6 +41,19 @@ const template = (range, chartSeries, chartData, tableColumns, tableData) => `<u
                             <Uu5TilesBricks.Table 
                                 columns='<uu5json/>${escapeUu5StringArray(tableColumns)}' 
                                 data='<uu5json/>${escapeUu5StringArray(tableData)}'
+                            />
+                        </UU5.Bricks.Panel>
+                        <UU5.Bricks.Panel 
+                            bgStyleHeader=\\"outline\\" 
+                            bgStyleContent=\\"transparent\\" 
+                            header=\\"Export Details\\" 
+                            mountContent=\\"onEachExpand\\" 
+                            colorSchemaContent=null 
+                            colorSchemaHeader=\\"blue-grey-rich\\"
+                        >
+                            <UU5.RichText.Block uu5string=\\"<uu5string/>
+                                <UU5.Bricks.Div><strong>archive-data-downloader command</strong>: <UU5.Bricks.Code>${command}</UU5.Bricks.Code></UU5.Bricks.Div>
+                                <UU5.Bricks.Div><strong>source</strong>: ${visualization.basePath}/${visualization.statsFolder}</UU5.Bricks.Div>\\"
                             />
                         </UU5.Bricks.Panel>" 
                     mountPanelContent="onEachExpand"

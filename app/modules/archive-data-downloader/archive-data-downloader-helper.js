@@ -10,7 +10,9 @@ const { CONSOLE_LOG } = require("../logger/logger");
  */
 const download = async (visualization, range, cmdArgs) => {
     CONSOLE_LOG.info(`Downloading data using archive-data-downloader`);
-    await callCliCommand(_commandTemplate(visualization, range, cmdArgs));
+    let command = _commandTemplate(visualization, range, cmdArgs);
+    await callCliCommand(command);
+    return command;
 }
 
 const _commandTemplate = (visualization, range, cmdArgs) => {

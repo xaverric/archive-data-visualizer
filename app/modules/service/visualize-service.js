@@ -17,9 +17,9 @@ const processVisualizations = async (cmdArgs, configuration, token) => {
 const _processRanges = async (cmdArgs, configuration, visualization, token) => {
     for (const range of visualization.ranges) {
         CONSOLE_LOG.info(`Processing range id: ${range.id}`);
-        await download(visualization, range, cmdArgs);
+        let command = await download(visualization, range, cmdArgs);
         let data = await readAllCsvFilesForVisualization(visualization);
-        let uu5StringContent = createUu5String(visualization, range, data);
+        let uu5StringContent = createUu5String(visualization, range, data, command);
         CONSOLE_LOG.info(`Uploading data into bookkit.`);
         await updateSection(configuration.bookkit.uri, visualization.pageCode, range.sectionCode, uu5StringContent, token);
     }
