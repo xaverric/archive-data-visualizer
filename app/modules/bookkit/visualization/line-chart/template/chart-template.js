@@ -1,6 +1,11 @@
 const { escapeUu5StringArray } = require("../../../helper/uu5string-escape-helper");
 
-const template = (visualization, range, chartSeries, chartData, tableColumns, tableData, command) => `<uu5string/>
+const template = (visualization, range, chart, table, aggregation, command) => {
+    const [chartSeries, chartData] = chart;
+    const [tableColumns, tableData] = table;
+    const [aggregationTableColumns, aggregationTableData] = aggregation;
+    
+    return `<uu5string/>
     <UU5.Bricks.Lsi>
         <UU5.Bricks.Lsi.Item language="en">
             <UU5.Bricks.Section contentEditable colorSchema=null level="3" header="${range.header}">
@@ -21,13 +26,13 @@ const template = (visualization, range, chartSeries, chartData, tableColumns, ta
                             mountContent=\\"onEachExpand\\"
                             colorSchemaContent=\\"teal\\"
                         >
-                            <UU5.SimpleChart.LineChart 
+                            <UU5.SimpleChart.${range.chartType || "LineChart"} 
                                 series='<uu5json/>${escapeUu5StringArray(chartSeries)}'
                                 data='<uu5json/>${escapeUu5StringArray(chartData)}' 
-                                valueUnit=\\"\\" 
+                                valueUnit=\\"${range.valueUnit || ""}\\" 
                                 labelUnit=\\"\\" 
                                 displayLegend=\\"bottom-center\\" 
-                                chartType=\\"natural\\"
+                                chartType=\\"linear\\"
                             />
                         </UU5.Bricks.Panel>
                         <UU5.Bricks.Panel 
@@ -41,6 +46,19 @@ const template = (visualization, range, chartSeries, chartData, tableColumns, ta
                             <Uu5TilesBricks.Table 
                                 columns='<uu5json/>${escapeUu5StringArray(tableColumns)}' 
                                 data='<uu5json/>${escapeUu5StringArray(tableData)}'
+                            />
+                        </UU5.Bricks.Panel>
+                        <UU5.Bricks.Panel 
+                            colorSchemaHeader=\\"blue-grey-rich\\" 
+                            bgStyleHeader=\\"outline\\" 
+                            bgStyleContent=\\"transparent\\" 
+                            header=\\"Aggregations\\" 
+                            mountContent=\\"onEachExpand\\" 
+                            colorSchemaContent=\\"\\"
+                        >
+                            <Uu5TilesBricks.Table 
+                                columns='<uu5json/>${escapeUu5StringArray(aggregationTableColumns)}' 
+                                data='<uu5json/>${escapeUu5StringArray(aggregationTableData)}'
                             />
                         </UU5.Bricks.Panel>
                         <UU5.Bricks.Panel 
@@ -61,5 +79,6 @@ const template = (visualization, range, chartSeries, chartData, tableColumns, ta
             </UU5.Bricks.Section>
         </UU5.Bricks.Lsi.Item>
     </UU5.Bricks.Lsi>`
+}
 
 module.exports = template;

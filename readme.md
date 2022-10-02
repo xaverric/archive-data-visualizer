@@ -50,6 +50,9 @@ All configuration fields are mandatory.
                     "sectionCode": "... section code to upload the generated uu5String visualization - must exist ...",
                     "header": "... section header ...",
                     "description": "... section description - uu5string supported ...",
+                    "chartType": "... chart type (LineChart|BarChart|AreaChart) - value is optional, LineChart is default...",
+                    "aggregations": ["... array of aggregation types - (MIN|MAX|AVG|SUM|MEDIAN)..."],
+                    "valueUnit": "... text value to be displayed on Y-axis ...",
                     "rangeType": "... range type value (week|month|all) ...",
                     "rangeSize": 1
                 }
