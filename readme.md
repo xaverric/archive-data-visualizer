@@ -50,11 +50,17 @@ All configuration fields are mandatory.
                     "sectionCode": "... section code to upload the generated uu5String visualization - must exist ...",
                     "header": "... section header ...",
                     "description": "... section description - uu5string supported ...",
-                    "chartType": "... chart type (LineChart|BarChart|AreaChart) - value is optional, LineChart is default...",
+                    "chartType": "... chart type (LineChart|BarChart|AreaChart|ComposedChart) - value is optional, LineChart is default...",
                     "aggregations": ["... array of aggregation types - (MIN|MAX|AVG|SUM|MEDIAN)..."],
                     "valueUnit": "... text value to be displayed on Y-axis ...",
                     "rangeType": "... range type value (week|month|all) ...",
-                    "rangeSize": 1
+                    "rangeSize": 1,
+                    "monitorTrend": { // Calculate trend in data and visualize it in the chart. The tool will also caluclate the difference between the trends from the whole range interval and the interval defined in the monitoredTrend configuration  
+                        "enabled": true,
+                        "percentageDifference": 10,
+                        "rangeType": "... range type value (week|month|all) ...",
+                        "rangeSize": 1
+                    }
                 }
             ],
             "attributes": [
@@ -67,7 +73,15 @@ All configuration fields are mandatory.
                     "type": "... attribute type (label|value) ...",
                     "valueKey": "... csv column name (Y axis) ...",
                     "name": "... display name ...",
-                    "colorSchema": "red-rich"
+                    "colorSchema": "red-rich",
+                    "chartType": "... applicable in case ComposedChart is used for the range as a chart type (area|line|bar) ...",
+                    "monitorTrend": { // definition of monitored trend line
+                        "enabled": true,
+                        "valueKey": "... attribute name ...",
+                        "name": "... diplay name ...",
+                        "colorSchema": "red",
+                        "chartType": "... applicable in case ComposedChart is used for the range as a chart type (area|line|bar) ...",
+                    }
                 }
             ]
         }

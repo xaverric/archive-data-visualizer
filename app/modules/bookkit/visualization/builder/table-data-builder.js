@@ -1,11 +1,10 @@
 /**
  * Builder function providing the data needed for visualization of table
- * 
- * @param {*} visualization 
- * @param {*} data 
- * @returns 
+ *
+ * @param data
+ * @returns {[{header: *}[], *]}
  */
- const build = (data) => {
+const build = (data) => {
     return [
         guessKeys(data).map(key => {return {header: key}}),
         data.map(item => Object.values(item))

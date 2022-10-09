@@ -1,21 +1,3 @@
-const AGGREGATION_SETTINGS = {
-    "MIN": {
-        action: (data, column) => getMin(data, column)
-    },
-    "MAX": {
-        action: (data, column) => getMax(data, column)
-    },
-    "AVG": {
-        action: (data, column) => getAvg(data, column)
-    },
-    "SUM": {
-        action: (data, column) => getSum(data, column)
-    },
-    "MEDIAN": {
-        action: (data, column) => getMedian(data, column)
-    }
-}
-
 const getMin = (data, columnName) => {
     return Math.min(...getValues(data, columnName));
 }
@@ -45,4 +27,11 @@ const getMedian = (data, columnName) => {
 
 const getValues = (data, columnName) => data.map(dataItem => parseFloat(dataItem[columnName]));
 
-module.exports = AGGREGATION_SETTINGS;
+module.exports = {
+    getMin,
+    getMax,
+    getAvg,
+    getSum,
+    getMedian,
+    getValues
+}

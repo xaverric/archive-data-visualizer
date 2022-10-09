@@ -1,5 +1,5 @@
 const { updateSection, updatePage } = require("../bookkit/client/bookkit-client");
-const createUu5String = require("../bookkit/visualization/line-chart/line-chart");
+const createUu5String = require("../bookkit/visualization/visualization");
 const { readAllCsvFilesForVisualization } = require("../io/csv-data-reader");
 const { CONSOLE_LOG } = require("../logger/logger");
 const {download} = require("../archive-data-downloader/archive-data-downloader-helper");

@@ -1,6 +1,7 @@
-const { escapeUu5StringArray } = require("../../../helper/uu5string-escape-helper");
+const { escapeUu5StringArray, stringifyToEscapedUu5StringObject} = require("../../helper/uu5string-escape-helper");
 
-const template = (visualization, range, chart, table, aggregation, command) => {
+const template = (visualization, range, trend, chart, table, aggregation, command) => {
+    const [trendColumns, trendData] = trend;
     const [chartSeries, chartData] = chart;
     const [tableColumns, tableData] = table;
     const [aggregationTableColumns, aggregationTableData] = aggregation;
@@ -52,6 +53,19 @@ const template = (visualization, range, chart, table, aggregation, command) => {
                             colorSchemaHeader=\\"blue-grey-rich\\" 
                             bgStyleHeader=\\"outline\\" 
                             bgStyleContent=\\"transparent\\" 
+                            header=\\"Trends\\" 
+                            mountContent=\\"onEachExpand\\" 
+                            colorSchemaContent=\\"\\"
+                        >
+                            <Uu5TilesBricks.Table 
+                                columns='<uu5json/>${escapeUu5StringArray(trendColumns)}' 
+                                data='<uu5json/>${escapeUu5StringArray(trendData)}'
+                            />
+                        </UU5.Bricks.Panel>
+                        <UU5.Bricks.Panel 
+                            colorSchemaHeader=\\"blue-grey-rich\\" 
+                            bgStyleHeader=\\"outline\\" 
+                            bgStyleContent=\\"transparent\\" 
                             header=\\"Aggregations\\" 
                             mountContent=\\"onEachExpand\\" 
                             colorSchemaContent=\\"\\"
@@ -69,10 +83,27 @@ const template = (visualization, range, chart, table, aggregation, command) => {
                             colorSchemaContent=null 
                             colorSchemaHeader=\\"blue-grey-rich\\"
                         >
-                            <UU5.RichText.Block uu5string=\\"<uu5string/>
-                                <UU5.Bricks.Div><strong>archive-data-downloader command</strong>: <UU5.Bricks.Code>${command}</UU5.Bricks.Code></UU5.Bricks.Div>
-                                <UU5.Bricks.Div><strong>source</strong>: ${visualization.basePath}/${visualization.statsFolder}</UU5.Bricks.Div>\\"
-                            />
+                            <UU5.Bricks.Section 
+                                contentEditable level=\\"5\\" 
+                                header=\\"archive-data-downloader command\\" 
+                                colorSchema=null
+                            >
+                                <UU5.RichText.Block uu5string=\\"<uu5string/><UU5.Bricks.Code>${command}</UU5.Bricks.Code>\\" />
+                            </UU5.Bricks.Section>
+                            <UU5.Bricks.Section 
+                                contentEditable level=\\"5\\" 
+                                header=\\"range configuration\\" 
+                                colorSchema=null
+                            >
+                                <UU5.CodeKit.CodeViewer value=\\"${stringifyToEscapedUu5StringObject(range)}\\" codeStyle=\\"json\\" />
+                            </UU5.Bricks.Section>
+                            <UU5.Bricks.Section 
+                                contentEditable level=\\"5\\" 
+                                header=\\"visualization configuration\\" 
+                                colorSchema=null
+                            >
+                                <UU5.CodeKit.CodeViewer value=\\"${stringifyToEscapedUu5StringObject(visualization)}\\" codeStyle=\\"json\\" />
+                            </UU5.Bricks.Section>
                         </UU5.Bricks.Panel>" 
                     mountPanelContent="onEachExpand"
                 />

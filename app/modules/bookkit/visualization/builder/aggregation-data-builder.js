@@ -8,10 +8,11 @@ const COLUMNS = [
 
 /**
  * Builder function providing the data needed for visualization of aggregations
- * 
- * @param {*} visualization 
- * @param {*} data 
- * @returns 
+ *
+ * @param visualization
+ * @param range
+ * @param data
+ * @returns {[[{header: string}, {header: string}, {header: string}], (*|*[])]}
  */
 const build = (visualization, range, data) => {
     const tableData = _buildTableData(visualization, range, data);
