@@ -4,18 +4,18 @@ const packageJson = require("../../../package.json");
 
 const usageDefinition = [
   {
-    header: `archive-data-downloader (${packageJson.version})`,
+    header: `archive-data-visualizer (${packageJson.version})`,
     content: 'Visualize your archive world!'
   },
   {
     header: 'Synopsis',
-    content: '$archive-data-downloader <command> <command parameters>'
+    content: '$archive-data-visualizer <command> <command parameters>'
   },
   {
     header: 'Commands',
     content: [
       { name: 'help', summary: 'Display this help.' },
-      { name: 'download', summary: 'Performs data download from the k8s container' }
+      { name: 'visualize', summary: 'Performs data visualization into the predefined bookkit page based on the configuration object.' }
     ]
   },
   {
