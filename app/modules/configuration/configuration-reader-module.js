@@ -9,15 +9,15 @@ const { mapPaths } = require("./helper/configuration-path-mapper-helper.js");
 const { sortRanges } = require("./helper/configuration-range-sort-helper.js");
 const { cleanFilterKeysAcrossRanges } = require("./helper/configuration-range-filter-helper.js");
 
-const CONFIG_DEFAULT_PATH = path.join(os.homedir(), '.archive-data-visualizer', 'config.json');
+const CONFIG_DEFAULT_PATH = path.join(os.homedir(), '.archive-data-visualizer', 'config.js');
 
-const readConfiguration = cmdArgs => {
+const readConfiguration = async cmdArgs => {
     let configuration;
 
     if (cmdArgs.config) {
-        configuration = fs.readJsonSync(path.resolve(cmdArgs.config));
+        configuration = await loadFile(path.resolve(cmdArgs.config));
     } else {
-        configuration = fs.readJsonSync(CONFIG_DEFAULT_PATH);
+        configuration = await loadFile(CONFIG_DEFAULT_PATH);
     }
     configuration = filterConfigurationByCmdArguments(configuration, cmdArgs);
     configuration = postProcessDataRange(configuration, cmdArguments);
@@ -28,7 +28,14 @@ const readConfiguration = cmdArgs => {
     return configuration;
 };
 
-
+const loadFile = async path => {
+    let file = require(path);
+    if (typeof file === "function") {
+      let loadedFile = await file();
+      return loadedFile;
+    }
+    return file;
+}
 
 module.exports = {
     readConfiguration

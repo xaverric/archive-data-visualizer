@@ -26,9 +26,9 @@ File path to the configuration object.
 
 **Configuration File Convention**
 
-All configuration fields are mandatory.
+All configuration fields are mandatory. Configuration file is a JS file exporting the configuration object.
 ```js
-{
+module.exports = {
     "bookkit": {        
         "accessCode1": "... access code 1 ...",
         "accessCode2": "... access code 2 ...",
@@ -89,7 +89,7 @@ All configuration fields are mandatory.
 }
 ```
 
-In case the configuration is not provided, the tool searches for the configuration file in a default location ```%HOME%/.archive-data-visualizer/config.json```
+In case the configuration is not provided, the tool searches for the configuration file in a default location ```%HOME%/.archive-data-visualizer/config.js```
 
 ### --archive-data-downloader-config
 File path to the configuration object of the ```archive-data-downloader``` tool. 
