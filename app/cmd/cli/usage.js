@@ -1,10 +1,11 @@
 const commandLineUsage = require('command-line-usage');
 const { cmdArgumentsDefinition } = require('./arguments.js');
+const packageJson = require("../../../package.json");
 
 const usageDefinition = [
   {
-    header: 'archive-data-downloader',
-    content: 'Extract data from any k8s container like a pro.'
+    header: `archive-data-downloader (${packageJson.version})`,
+    content: 'Visualize your archive world!'
   },
   {
     header: 'Synopsis',
