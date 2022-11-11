@@ -1,10 +1,10 @@
 const fs = require("fs-extra");
 const path = require("path");
 const csv = require("csvtojson");
-const { LOG } = require("../logger/logger");
+const { CONSOLE_LOG} = require("../logger/logger");
 
 const readAllCsvFilesForVisualization = async (visualization) => {
-    LOG.info(`Reading extracted data for visualization (${visualization.id})`);
+    CONSOLE_LOG.info(`Reading extracted data for visualization (${visualization.id})`);
     let files = fs.readdirSync(visualization.output)
     let csvItems = [];
     for (const file of files) {

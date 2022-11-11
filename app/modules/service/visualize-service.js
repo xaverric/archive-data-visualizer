@@ -6,8 +6,8 @@ const {download} = require("../archive-data-downloader/archive-data-downloader-h
 const { emptyDir } = require("../io/fs-helper");
 
 const processVisualizations = async (cmdArgs, configuration, token) => {
-    for (const visualization of configuration.visualizations) {
-        CONSOLE_LOG.info(`Processing visualization id: ${visualization.id}`);
+    for (const [index, visualization] of configuration.visualizations.entries()) {
+        CONSOLE_LOG.info(`Processing visualization id: ${visualization.id} (${index+1} of ${configuration.visualizations.length})`);
         emptyDir(visualization);
         await updatePage(configuration.bookkit.uri, visualization, token);
         await _processRanges(cmdArgs, configuration, visualization, token);
@@ -15,8 +15,8 @@ const processVisualizations = async (cmdArgs, configuration, token) => {
 }
 
 const _processRanges = async (cmdArgs, configuration, visualization, token) => {
-    for (const range of visualization.ranges) {
-        CONSOLE_LOG.info(`Processing range id: ${range.id}`);
+    for (const [index, range] of visualization.ranges.entries()) {
+        CONSOLE_LOG.info(`Processing range id: ${range.id} (${index+1} of ${visualization.ranges.length})`);
         let command = await download(visualization, range, cmdArgs);
         let data = await readAllCsvFilesForVisualization(visualization);
         let uu5StringContent = createUu5String(visualization, range, data, command);
