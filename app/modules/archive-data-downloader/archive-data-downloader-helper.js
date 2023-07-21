@@ -24,6 +24,7 @@ const _commandTemplate = (visualization, range, cmdArgs) => {
     template = `${template} --mode single`
     template = `${template} --folders ${visualization.statsFolder}`
     template = range.rangeType === "all" ? template : `${template} --filter --filterKeys ${range.filterKeys.join(" ")}`
+    template = visualization.globalFilter ? `${template} --globalFilter ${visualization.globalFilter}` : template;
     template = `${template} --output ${visualization.tempFolderK8s}`
     template = `${template} --noprompt`;
     return template
