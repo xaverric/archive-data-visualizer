@@ -1,4 +1,5 @@
 const { escapeUu5StringArray, stringifyToEscapedUu5StringObject} = require("../../helper/uu5string-escape-helper");
+const {dynamicAxisHelper} = require("../helper/dynamic-axis-helper");
 
 const template = (visualization, range, trend, chart, table, aggregation, command) => {
     const [trendColumns, trendData] = trend;
@@ -29,7 +30,8 @@ const template = (visualization, range, trend, chart, table, aggregation, comman
                         >
                             <UU5.SimpleChart.${range.chartType || "LineChart"} 
                                 series='<uu5json/>${escapeUu5StringArray(chartSeries)}'
-                                data='<uu5json/>${escapeUu5StringArray(chartData)}' 
+                                data='<uu5json/>${escapeUu5StringArray(chartData)}'
+                                ${range.axisLimitEnabled && `valueAxisDomain='<uu5json/>${escapeUu5StringArray(dynamicAxisHelper(chartSeries, chartData))}'`}
                                 valueUnit=\\"${range.valueUnit || ""}\\" 
                                 labelUnit=\\"\\" 
                                 displayLegend=\\"bottom-center\\" 
