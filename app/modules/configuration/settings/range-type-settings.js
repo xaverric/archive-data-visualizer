@@ -10,6 +10,10 @@ const RANGE_TYPE_SETTINGS = {
     all: {
         length: 0,
         priority: 3
+    },
+    custom: {
+        length: 0,
+        priority: 4
     }
 }
 

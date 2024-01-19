@@ -53,7 +53,9 @@ module.exports = {
                     "chartType": "... chart type (LineChart|BarChart|AreaChart|ComposedChart) - value is optional, LineChart is default...",
                     "aggregations": ["... array of aggregation types - (MIN|MAX|AVG|SUM|MEDIAN)..."],
                     "valueUnit": "... text value to be displayed on Y-axis ...",
-                    "rangeType": "... range type value (week|month|all) ...",
+                    "rangeType": "... range type value (week|month|all|custom) ...",
+                    "rangeStart": "... YYYY-MM-DD ...", // supported for custom rangeType only
+                    "rangeEnd": "... YYYY-MM-DD ...", // supported for custom rangeType only
                     "rangeSize": 1,
                     "monitorTrend": { // Calculate trend in data and visualize it in the chart. The tool will also caluclate the difference between the trends from the whole range interval and the interval defined in the monitoredTrend configuration  
                         "enabled": true,

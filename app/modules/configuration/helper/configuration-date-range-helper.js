@@ -4,15 +4,24 @@ const RANGE_TYPE_SETTINGS = require("../settings/range-type-settings");
 const postProcessDataRange = (configuration, cmdArguments) => {
     configuration.visualizations.forEach(visualization => {
         visualization.ranges.forEach(range => {
-            let endDate = new Date();
-            let startDate = (endDate - 1000 * 60 * 60 * 24 * RANGE_TYPE_SETTINGS[range.rangeType].length * range.rangeSize);
+            const [startDate, endDate] = _calculateDatesBasedOnRangeType(range);
             range.filterKeys = _generateDateRange(startDate, endDate);
         })
     });
-
-    // TODO custom data range from cmdArguments
-    
     return configuration;
+}
+
+const _calculateDatesBasedOnRangeType = (range) => {
+    let startDate;
+    let endDate;
+    if (range.rangeType === "custom") {
+        startDate = Date.parse(range.rangeStart)
+        endDate = Date.parse(range.rangeEnd)
+    } else {
+        endDate = new Date();
+        startDate = (endDate - 1000 * 60 * 60 * 24 * RANGE_TYPE_SETTINGS[range.rangeType].length * range.rangeSize);
+    }
+    return [startDate, endDate]
 }
 
 const _generateDateRange = (startDate, endDate) => {
